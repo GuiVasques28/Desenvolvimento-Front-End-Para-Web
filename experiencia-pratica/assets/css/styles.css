@@ -1,12 +1,4 @@
-/* style.css — Sistema de design e utilitários para "Gatitos do Bem"
-   Comentários escritos por Gui (sim, sou eu comentando aqui).
-   O arquivo cobre:
-   - Variáveis do design system (cores, tipografia, espaçamento)
-   - Grid de 12 colunas + utilitários responsivos
-   - 5 breakpoints
-   - Menu responsivo com dropdown (ver Nota A)
-   - Cards, botões, formulários, alertas
-
+/* ===================== Instruções para uso ===================== 
    Nota A: Para funcionar sem JS, adiciona este trecho no <header>
      <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-hidden="true">
      <label for="menu-toggle" class="hamburger" aria-label="Abrir menu" aria-hidden="true">
