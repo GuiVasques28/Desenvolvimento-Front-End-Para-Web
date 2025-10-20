@@ -402,28 +402,53 @@ a.externo { display: inline-block; padding: 8px 12px; background: var(--color-pr
 a.externo:hover { background: var(--color-primary-600); }
 
 /* ============= Cards (sistema de cards) ============= */
-.card {
+
+.projetos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.projetos .projeto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 12px;
-  padding: var(--space-md);
   box-shadow: var(--shadow-1);
   overflow: hidden;
+  padding: var(--space-md);
+  text-align: center;
 }
-.card img { border-radius: 8px; margin-bottom: var(--space-sm); }
-.card h3 { margin-top: 0; margin-bottom: var(--space-xs); }
-.card p { margin: 0; color: var(--color-muted); }
 
-/* Grid de cards para projetos */
-.projetos .projeto {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-sm);
+.projetos .projeto img {
+  width: 100%;
+  max-width: 700px;
+  border-radius: 10px;
+  object-fit: cover;
   margin-bottom: var(--space-md);
 }
+
+.projetos .projeto h3 {
+  margin: 0 0 var(--space-xs);
+  color: var(--color-text);
+}
+
+.projetos .projeto p {
+  color: var(--color-muted);
+  margin: 0 0 var(--space-sm);
+}
+
+/* Em telas maiores, continua empilhado (só centraliza melhor) */
 @media (min-width: 768px) {
-  .projetos { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); }
-  .projetos .projeto { margin: 0; }
+  .projetos {
+    align-items: center;
+  }
+  .projetos .projeto {
+    width: 80%;
+  }
 }
 
 /* ============= Botões ============= */
@@ -536,61 +561,3 @@ img[src$=".svg"] { shape-rendering: geometricPrecision; }
 @media (max-width: 767px) {
   nav[role="navigation"], nav { display: block; }
 }
-
-/* === FORÇA MÁXIMA: corrige imagens invisíveis na seção de projetos === */
-/* Colar no final do style.css */
-
-.projetos,
-.projetos * {
-  /* garante que nada esteja escondendo por display/visibility/opacity */
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-.projetos,
-.projetos .projeto {
-  /* usa flex pra evitar grids aninhados problemáticos */
-  display: flex !important;
-  flex-direction: column !important;
-  flex-wrap: nowrap !important;
-  gap: var(--space-sm) !important;
-  align-items: stretch !important;
-}
-
-.projetos .projeto {
-  max-width: 360px !important;
-  width: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 1px solid var(--color-border) !important;
-  background: var(--color-surface) !important;
-  box-shadow: var(--shadow-1) !important;
-  overflow: visible !important; /* evita corte */
-  min-height: 1px !important;   /* evita height: 0 herdado */
-  z-index: 1 !important;
-}
-
-.projetos .projeto img {
-  display: block !important;
-  width: 100% !important;
-  height: auto !important;
-  max-height: none !important;
-  object-fit: cover !important;
-  border-radius: 0 !important;
-  margin: 0 !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  z-index: 2 !important;
-}
-
-/* garante que não haja pseudo-elementos cobrindo a imagem */
-.projetos .projeto::before,
-.projetos .projeto::after,
-.projetos .projeto img::before,
-.projetos .projeto img::after {
-  display: none !important;
-  content: none !important;
-}
-
-/* se houver background-image em .projeto que por acaso esteja sobrepondo, reduzimos sua opacidade */
-.projetos .projeto[style] { background-color: transparent !important; background-image: none !important; }
